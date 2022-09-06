@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatRoomController;
+use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('/', UserController::class);
 
+Route::resource('/firebase', FirebaseController::class);
 Route::resource('/chatroom',ChatRoomController::class);
