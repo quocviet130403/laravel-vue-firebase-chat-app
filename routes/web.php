@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('/', UserController::class);
+Route::post('/storeLogin', [UserController::class,'login'])->name('web.login');
 
-Route::resource('/firebase', FirebaseController::class);
 Route::resource('/chatroom',ChatRoomController::class);

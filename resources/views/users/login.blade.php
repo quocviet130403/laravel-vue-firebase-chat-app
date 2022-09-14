@@ -8,126 +8,277 @@
 </head>
 <body>
     <style>
-        *,
-        *:before,
-        *:after {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        }
-        body {
-        background: url(https://source.unsplash.com/1920x2400?hdr,sunset,ocean);
-        background-size: cover;
-        background-repeat: no-repeat;
-        
-        }
-        form {
-        height: 520px;
-        width: 400px;
-        background-color: rgba(255, 255, 255, 0.03);
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        border-radius: 10px;
-        backdrop-filter: blur(15px);
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-        padding: 50px 35px;
-        }
-        form * {
-        font-family: "Poppins", sans-serif;
-        color: #ffffff;
-        letter-spacing: 0.5px;
-        outline: none;
-        border: none;
-        }
-        form h3 {
-        font-size: 40px;
-        font-weight: 700;
-        line-height: 42px;
-        text-align: center;
+        @import url('https://fonts.googleapis.com/css?family=Rubik:400,700');
+
+        *{
+            font-family: 'Rubik', sans-serif;
         }
 
-        label {
-        display: block;
-        margin-top: 30px;
-        font-size: 16px;
-        font-weight: 500;
+        #form {
+            margin: 50px auto;
+            width: 350px;
+            padding:45px 30px 15px;
+            position: relative;
+            box-shadow: 5px 5px 25px rgba(0,0,0,.2);
+            border-radius: 1px;
+            background-color: #2c3e50;
+            height: 450px;
+            overflow: hidden
         }
+
+        #form #toggle-forms{
+            position: absolute;
+            top: 15px;
+            right: 30px;
+            border: 1px solid #3a4a5d;
+            border-radius: 20px;
+            overflow: hidden;
+            z-index: 99
+        }
+
+        #form #toggle-forms > button {
+            border:none;
+            background:none;
+            background-color: #34495e;
+            border: 1px solid #22303e;
+            color: #FFF;
+            float:left;
+            border-bottom-right-radius: 20px;
+            border-top-right-radius: 20px;
+            padding:2px 10px;
+        }
+
+        #form #toggle-forms > button:first-of-type{
+            border-right: 0;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+
+        #form #toggle-forms > button.active {
+            background-color: #3498db;
+        }
+
+        #form form h4{
+            text-transform: capitalize;
+            color:#fff;
+        }
+
+        .input-field label.active {
+            color: #FFF !important;
+            font-size: 1.1rem
+        }
+
+        #form form input:focus {
+            border-bottom-color: dodgerblue !important
+        }
+
+        #form .row >button{
+            background-color: dodgerblue
+        }
+
         input {
-        display: block;
-        height: 50px;
-        width: 100%;
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 3px;
-        padding: 0 10px;
-        margin-top: 8px;
-        font-size: 14px;
-        font-weight: 300;
-        }
-        ::placeholder {
-        color: #e1e1e1;
+            color: #FFF;
+            padding-left: 15px !important
         }
 
-        input:hover{
-        outline: 2px solid #0001;
+        #form form{
+            padding:45px 30px 15px;
+            position: absolute;
+            top:0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #2c3e50;
+            transition: all .3s linear;
+            z-index: 2
         }
-        button {
-        margin-top: 50px;
-        width: 100%;
-        background-color: #ffffff;
-        color: #080710;
-        padding: 15px 0;
-        font-size: 18px;
-        font-weight: 600;
-        border-radius: 5px;
-        cursor: pointer;
+
+        #form form:last-of-type {
+            left: 100%
         }
-        .social {
-        margin-top: 30px;
-        display: flex;
+
+        #form.active form:first-of-type {
+            left: -100% !important
         }
-        .social div {
-        background: red;
-        width: 150px;
-        border-radius: 3px;
-        padding: 5px 10px 10px 5px;
-        background-color: rgba(255, 255, 255, 0.27);
-        color: #eaf0fb;
-        text-align: center;
+
+        #form.active form:last-of-type{
+            left:0 !important
         }
-        .social div:hover {
-        background-color: rgba(255, 255, 255, 0.47);
+
+        @media (max-width: 767px) {
+            #form {
+                width: 290px !important;
+            }
+        }
+        .animate {
+            height: 100%;
+            display: block;
+            margin: 0;
+            padding: 0;
+            width: 100%
+        }
+
+        .animate > li {
+            position: absolute;
+            height: 50px;
+            width: 50px;
+            top: 100%;
+            left: 10px;
+            background-color:  rgba(255,255,255,.1);
+            z-index: -1;
+            overflow: hidden;
+            animation: move 10s linear infinite
+        }
+
+        .animate > li:nth-last-of-type(2) {
+            left: 70px;
+            animation-delay: 3.5s;
+            height: 15px;
+            width: 15px;
+        }
+
+        .animate > li:nth-last-of-type(3) {
+            left: 140px;
+            animation-delay: 3s
+        }
+
+        .animate > li:nth-last-of-type(4) {
+            left: 210px;
+            animation-delay: 5.5s
+        }
+
+        .animate > li:nth-last-of-type(5) {
+            left: 280px;
+            animation-delay: 1.8s;
+            height: 65px;
+            width: 65px
+        }
+
+        .animate > li:nth-last-of-type(6) {
+            left: 140px;
+            animation-delay: 6.8s;
+            height: 25px;
+            width: 25px
+        }
+
+        .animate > li:nth-last-of-type(7) {
+            left: 280px;
+            animation-delay: 5s;
+            height: 35px;
+            width: 35px
+        }
+
+        label{
+            color: #fff;
+        }
         
-        }
-        .social .fb {
-        margin-left: 25px;
-        }
-        .social i {
-        margin: 10px 0 4px;
+        button{
+            margin-top: 20px;
         }
 
-    @media only screen and (max-width: 600px) {
-        body {
-            background:url(https://source.unsplash.com/1080x2400?sunset+birdeye+ocean);
+        @keyframes move {
+            to {top: -50px;transform: rotate(360deg)}
         }
-    }
+
+        .forgot{
+            color: dodgerblue
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+            cursor: pointer
+        }
     </style>
-    <form>
-        <h3>Login Here</h3>
-      
-        <label for="username">Username</label>
-        <input type="text" placeholder="Email or Phone" id="username">
-      
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password">
-      
-        <button>Log In</button>
-        <div class="social">
-          <div class="go"><i class="fab fa-google"></i> Google</div>
-          <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
+    <section id="form">
+        <div id="toggle-forms">
+            <button class="waves-effect waves-light active" id="login">Login</button>
+            <button class="waves-effect waves-light" id="register">Register</button>
         </div>
-      </form>
+        <form class="col s12" action="{{route('web.login')}}" method="POST">
+            <div class="row center-align">
+                <h4 class="white-text">login</h4>
+            </div>
+            <div class="row">
+                <div class="input-field">
+                    <input id="email" type="email" class="validate" required>
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field">
+                    <input id="password" type="password" class="validate" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row center-align">
+                <button class="btn waves-effect waves-light">
+                    Login
+                </button>
+            </div>
+									<p class="forgot">Forgot Password?</p>
+            <ul class="animate">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </form>
+        <form class="col s12" method="POST" action="{{route('store')}}">
+            <div class="row center-align">
+                <h4 class="white-text">register</h4>
+            </div>
+            <div class="row">
+                <div class="input-field">
+                    <input name="name" id="name" type="name" class="validate" readonly>
+                    <label for="name">Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field">
+                    <input name="email" id="email" type="email" class="validate" required>
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field">
+                    <input name="password" id="password" type="password" class="validate" required>
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row center-align">
+                <button class="btn waves-effect waves-light">
+                    Register
+                </button>
+            </div>
+            <ul class="animate">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </form>
+    </section>
+    <script>
+        let $id = (id) => document.getElementById(id);
+        var [login, register, form] = ['login', 'register', 'form'].map(id => $id(id));
+
+        [login, register].map(element => {
+            element.onclick = function () {
+                [login, register].map($ele => {
+                    $ele.classList.remove("active");
+                });
+                this.classList.add("active");
+                this.getAttribute("id") === "register"?  form.classList.add("active") : form.classList.remove("active");
+            }
+        });
+    </script>
 </body>
 </html>

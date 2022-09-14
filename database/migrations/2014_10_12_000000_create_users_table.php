@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->unsignedBigInteger('chatroom_id')->default(NULL);
+            $table->unsignedBigInteger('chatroom_id')->default(null)->nullable();
             $table->foreign('chatroom_id')->references('id')->on('chatrooms')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
