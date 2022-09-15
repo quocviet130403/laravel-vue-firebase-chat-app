@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChatRoomController;
 use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebControlller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,5 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::resource('/', UserController::class);
-Route::post('/storeLogin', [UserController::class,'login'])->name('web.login');
-
+Route::get('/',[WebControlller::class,'show']);
 Route::resource('/chatroom',ChatRoomController::class);

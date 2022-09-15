@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login</title>
 </head>
 <body>
     <style>
@@ -190,82 +190,14 @@
             text-decoration: underline;
             cursor: pointer
         }
+        .input-value{
+            color:#000 !important;
+        }
     </style>
-    <section id="form">
-        <div id="toggle-forms">
-            <button class="waves-effect waves-light active" id="login">Login</button>
-            <button class="waves-effect waves-light" id="register">Register</button>
-        </div>
-        <form class="col s12" action="{{route('web.login')}}" method="POST">
-            <div class="row center-align">
-                <h4 class="white-text">login</h4>
-            </div>
-            <div class="row">
-                <div class="input-field">
-                    <input id="email" type="email" class="validate" required>
-                    <label for="email">Email</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field">
-                    <input id="password" type="password" class="validate" required>
-                    <label for="password">Password</label>
-                </div>
-            </div>
-            <div class="row center-align">
-                <button class="btn waves-effect waves-light">
-                    Login
-                </button>
-            </div>
-									<p class="forgot">Forgot Password?</p>
-            <ul class="animate">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </form>
-        <form class="col s12" method="POST" action="{{route('store')}}">
-            <div class="row center-align">
-                <h4 class="white-text">register</h4>
-            </div>
-            <div class="row">
-                <div class="input-field">
-                    <input name="name" id="name" type="name" class="validate" readonly>
-                    <label for="name">Name</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field">
-                    <input name="email" id="email" type="email" class="validate" required>
-                    <label for="email">Email</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field">
-                    <input name="password" id="password" type="password" class="validate" required>
-                    <label for="password">Password</label>
-                </div>
-            </div>
-            <div class="row center-align">
-                <button class="btn waves-effect waves-light">
-                    Register
-                </button>
-            </div>
-            <ul class="animate">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </form>
-    </section>
+    <div id="app">
+        <form-component></form-component>
+    </div>
+    <script src="{{asset('js/app.js')}}"></script>
     <script>
         let $id = (id) => document.getElementById(id);
         var [login, register, form] = ['login', 'register', 'form'].map(id => $id(id));
