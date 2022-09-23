@@ -36,30 +36,30 @@
                 <li></li>
             </ul>
         </form>
-        <form class="col s12" @submit.prevent>
+        <form class="col s12" @submit.prevent="register()">
             <div class="row center-align">
                 <h4 class="white-text">register</h4>
             </div>
             <div class="row">
                 <div class="input-field">
-                    <input name="name" id="name" type="name" class="validate input-value" v-model="dataRegister.name">
+                    <input name="name" id="name" type="name" class="validate input-value" v-model="dataRegister.name" required>
                     <label for="name">Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field">
-                    <input name="email" id="email" type="email" class="validate input-value" v-model="dataRegister.email">
+                    <input name="email" id="email" type="email" class="validate input-value" v-model="dataRegister.email" required>
                     <label for="email">Email</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field">
-                    <input name="password" id="password" type="password" class="validate input-value" v-model="dataRegister.password">
+                    <input name="password" id="password" type="password" class="validate input-value" v-model="dataRegister.password" required>
                     <label for="password">Password</label>
                 </div>
             </div>
             <div class="row center-align">
-                <button class="btn waves-effect waves-light" @click="register()">
+                <button type="submit" class="btn waves-effect waves-light">
                     Register
                 </button>
             </div>

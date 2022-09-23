@@ -3,7 +3,6 @@ import Vue from 'vue'
 let loader = null;
 
 function addLoader(){
-    console.log(Vue.prototype);
     loader = Vue.prototype.$loading({
         lock: true,
         text: 'Loading',
@@ -39,5 +38,6 @@ export const register = ({commit}, payload) => {
         }
 
         removeLoader()
+        
     })
 }

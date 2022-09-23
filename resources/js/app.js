@@ -6,9 +6,15 @@
 
 require('./bootstrap');
 
+import Vue from 'vue';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 window.Vue = require('vue').default;
 
 import store from './store/index';
+
+Vue.use(ElementUI);
 
 /**
  * The following block of code may be used to automatically register your
