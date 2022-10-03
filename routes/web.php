@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[WebControlller::class,'show']);
+Route::get('/',[WebControlller::class,'show'])->name('index');
 Route::resource('/chatroom',ChatRoomController::class);

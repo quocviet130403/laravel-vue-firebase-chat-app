@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -27,10 +28,42 @@ class UserController extends Controller
     {
         //
         $data = $request->all();
+        $listUsername = User::pluck('email')->toArray();
+        if(in_array($data['email'],$listUsername)){
+            return response()->json([
+                'errorCode' => 500,
+                'errorMsg' => 'Tài khoản tồn tại'
+            ]);
+        }
+        $user = User::create($data);
+        if($user){
+            return response()->json([
+                'errorCode' => 200,
+                'errorMsg' => 'Đăng kí thành công'
+            ]);
+        }
         return response()->json([
-            'errorCode' => 200,
-            'data' => $data
+            'errorCode' => 500,
+            'errorMsg' => 'Đăng kí thất bại'
         ]);
+    }
+
+    public function login(Request $request){
+        $data = $request->all();
+        $users = User::all();
+        foreach($users as $user){
+            if($user->email == $data['email'] && $user->password == $data['password']){
+                session()->put('is_login',$user->id);
+                return response()->json([
+                    'errorCode' => 200,
+                ]);
+            }
+        }
+        return response()->json([
+            'errorCode' => 500,
+            'errorMsg' => 'Tài khoảng hoặc mặt khẩu không chính xác'
+        ]);
+
     }
 
     /**

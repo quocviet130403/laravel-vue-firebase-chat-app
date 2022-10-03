@@ -7033,6 +7033,12 @@ var render = function render() {
     staticClass: "col s12",
     attrs: {
       id: "form-login"
+    },
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.login();
+      }
     }
   }, [_vm._m(1), _vm._v(" "), _c("div", {
     staticClass: "row"
@@ -7094,18 +7100,9 @@ var render = function render() {
     attrs: {
       "for": "password"
     }
-  }, [_vm._v("Password")])])]), _vm._v(" "), _c("div", {
-    staticClass: "row center-align"
-  }, [_c("button", {
-    staticClass: "btn waves-effect waves-light",
-    on: {
-      click: function click($event) {
-        return _vm.login();
-      }
-    }
-  }, [_vm._v("\n                    Login\n                ")])]), _vm._v(" "), _c("p", {
+  }, [_vm._v("Password")])])]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("p", {
     staticClass: "forgot"
-  }, [_vm._v("Forgot Password?")]), _vm._v(" "), _vm._m(2)]), _vm._v(" "), _c("form", {
+  }, [_vm._v("Forgot Password?")]), _vm._v(" "), _vm._m(3)]), _vm._v(" "), _c("form", {
     staticClass: "col s12",
     on: {
       submit: function submit($event) {
@@ -7113,7 +7110,7 @@ var render = function render() {
         return _vm.register();
       }
     }
-  }, [_vm._m(3), _vm._v(" "), _c("div", {
+  }, [_vm._m(4), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "input-field"
@@ -7209,7 +7206,7 @@ var render = function render() {
     attrs: {
       "for": "password"
     }
-  }, [_vm._v("Password")])])]), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5)])]);
+  }, [_vm._v("Password")])])]), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm._m(6)])]);
 };
 
 var staticRenderFns = [function () {
@@ -7240,6 +7237,15 @@ var staticRenderFns = [function () {
   }, [_c("h4", {
     staticClass: "white-text"
   }, [_vm._v("login")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "row center-align"
+  }, [_c("button", {
+    staticClass: "btn waves-effect waves-light"
+  }, [_vm._v("\n                    Login\n                ")])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
@@ -7380,6 +7386,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "register": () => (/* binding */ register)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+ // import {firebase} from '../firebase.js'
 
 var loader = null;
 
@@ -7396,15 +7403,28 @@ function removeLoader() {
   loader.close();
 }
 
-var login = function login(_ref, payload) {// axios.post('/api/user',payload).then(res => {
-  //     if(res.status == 200){
-  //         if(res.data.errorCode == 200){
-  //             console.log(res.data.data);
-  //         }
-  //     }
-  // })
+function notify(title, content) {
+  vue__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.$notify({
+    title: title == 200 ? 'Thành công' : 'Thất bại',
+    dangerouslyUseHTMLString: true,
+    message: content
+  });
+}
 
+var login = function login(_ref, payload) {
   var commit = _ref.commit;
+  axios.post('/api/user/login', payload).then(function (res) {
+    addLoader();
+
+    if (res.status == 200) {
+      if (res.data.errorCode == 200) {
+        location.reload();
+      }
+    }
+
+    removeLoader();
+    notify(res.data.errorCode, res.data.errorMsg);
+  });
 };
 var register = function register(_ref2, payload) {
   var commit = _ref2.commit;
@@ -7412,9 +7432,9 @@ var register = function register(_ref2, payload) {
     addLoader();
 
     if (res.status == 200) {
-      if (res.data.errorCode == 200) {
-        console.log(res.data.data);
-      }
+      notify(res.data.errorCode, res.data.errorMsg);
+    } else {
+      notify(500, 'Vui lòng thử lại');
     }
 
     removeLoader();

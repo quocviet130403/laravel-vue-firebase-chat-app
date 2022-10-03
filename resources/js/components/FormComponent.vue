@@ -4,7 +4,7 @@
             <button class="waves-effect waves-light active" id="login">Login</button>
             <button class="waves-effect waves-light" id="register">Register</button>
         </div>
-        <form class="col s12" id="form-login">
+        <form class="col s12" id="form-login" @submit.prevent="login()">
             <div class="row center-align">
                 <h4 class="white-text">login</h4>
             </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="row center-align">
-                <button class="btn waves-effect waves-light" @click="login()">
+                <button class="btn waves-effect waves-light">
                     Login
                 </button>
             </div>
