@@ -17,4 +17,3 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/',[WebControlller::class,'show'])->name('index');
-Route::resource('/chatroom',ChatRoomController::class);

@@ -13,7 +13,7 @@ export default new Vuex.Store({
 
     },
     state: {
-        tableData: [],
+        data: [],
     },
     getters,
     mutations,

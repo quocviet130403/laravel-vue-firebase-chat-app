@@ -57,3 +57,17 @@ export const register = ({commit}, payload) => {
         
     })
 }
+
+export const getListChat = ({commit}, payload) => {
+    axios.get('api/chatroom',payload).then(res => {
+
+        addLoader()
+
+        if(res.status == 200){
+            console.log(res.data)
+        }
+
+        removeLoader()
+        
+    })
+}

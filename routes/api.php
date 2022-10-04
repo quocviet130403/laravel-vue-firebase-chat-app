@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ChatRoomController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/user', UserController::class);
+Route::apiResource('/chatroom',ChatRoomController::class);
 Route::post('/user/login', [UserController::class,'login']);
