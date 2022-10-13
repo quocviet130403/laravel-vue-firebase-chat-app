@@ -1,5 +1,6 @@
 import Vue from 'vue'
-// import {firebase} from '../firebase.js'
+import { database } from '../firebase.js';
+import { ref, set, child, get, onValue } from "firebase/database";
 
 let loader = null;
 
@@ -26,9 +27,10 @@ function notify(title,content){
 
 
 export const login = ({commit}, payload) => {
+    addLoader()
+
     axios.post('/api/user/login',payload).then(res => {
 
-        addLoader()
 
         if(res.status == 200){
             if(res.data.errorCode == 200){
@@ -36,16 +38,18 @@ export const login = ({commit}, payload) => {
             }
         }
 
-        removeLoader()
 
         notify(res.data.errorCode,res.data.errorMsg);
     })
+    removeLoader()
+
 }
 
 export const register = ({commit}, payload) => {
+    addLoader()
+
     axios.post('/api/user',payload).then(res => {
 
-        addLoader()
 
         if(res.status == 200){
             notify(res.data.errorCode,res.data.errorMsg);
@@ -53,21 +57,37 @@ export const register = ({commit}, payload) => {
             notify(500,'Vui lòng thử lại');
         }
 
-        removeLoader()
         
     })
+    removeLoader()
+
 }
 
 export const getListChat = ({commit}, payload) => {
+    addLoader()
+
     axios.get('api/chatroom',payload).then(res => {
 
-        addLoader()
-
         if(res.status == 200){
-            console.log(res.data)
+            // return res.data;
+            console.log(res.data);
+            return commit("setData",res.data);
         }
 
-        removeLoader()
-        
     })
+    removeLoader()
+
 }
+
+export const chatStore = ({commit}, payload) => {
+    addLoader()
+
+    set(ref(database, 'texts/' + Date.now()), {
+        text: payload.content,
+        chat_id: payload.id,
+        user_id: payload.userId,
+        time: Date.now()
+    });
+
+    removeLoader()
+} 
